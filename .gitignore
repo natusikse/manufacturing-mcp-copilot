@@ -19,3 +19,8 @@ htmlcov/
 
 # Local environment variables
 .env
+
+# Runtime databases
+data/*.db
+data/*.db-shm
+data/*.db-wal
