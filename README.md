@@ -15,6 +15,8 @@ This portfolio project demonstrates how the Model Context Protocol can connect A
 * Static analysis and formatting with Ruff
 * SQLite-backed persistence with automatic schema initialization
 * Isolated temporary databases for automated tests
+* Inventory monitoring with automatic low-stock indicators
+* Production-order tracking and status filtering
 
 ## MCP Tools
 
@@ -36,6 +38,14 @@ Returns operational data for one machine, including:
 * current status
 * temperature
 * hourly output
+
+### `get_inventory_status`
+
+Returns inventory quantities, reorder levels, storage locations, and low-stock indicators. The optional `low_stock_only` argument returns only materials requiring replenishment.
+
+### `list_production_orders`
+
+Returns production targets, completed quantities, due dates, and order statuses. An optional `status` argument filters the results.
 
 ## Project Structure
 
@@ -91,7 +101,7 @@ uv run ruff format .
 * [x] Add equipment status tools
 * [x] Add automated tests
 * [x] Replace in-memory data with SQLite
-* [ ] Add production-order and inventory tools
+* [x] Add production-order and inventory tools
 * [ ] Add technical-document retrieval
 * [ ] Add an LLM-powered assistant layer
 * [ ] Evaluate answer quality and hallucinations

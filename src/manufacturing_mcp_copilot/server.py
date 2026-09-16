@@ -7,8 +7,8 @@ from manufacturing_mcp_copilot import operations
 mcp = MCPServer(
     "Manufacturing Operations",
     instructions=(
-        "Provides operational information about manufacturing equipment. "
-        "Use list_machines for an overview and get_machine_status for details."
+        "Provides tools for manufacturing equipment, inventory, "
+        "and production-order monitoring."
     ),
 )
 
@@ -23,6 +23,22 @@ def list_machines(status: str | None = None) -> list[dict[str, Any]]:
 def get_machine_status(machine_id: str) -> dict[str, Any]:
     """Get the current operational status of a manufacturing machine."""
     return operations.get_machine_status(machine_id)
+
+
+@mcp.tool()
+def get_inventory_status(
+    low_stock_only: bool = False,
+) -> list[dict[str, Any]]:
+    """List inventory items and identify materials requiring replenishment."""
+    return operations.get_inventory_status(low_stock_only)
+
+
+@mcp.tool()
+def list_production_orders(
+    status: str | None = None,
+) -> list[dict[str, Any]]:
+    """List production orders, optionally filtered by order status."""
+    return operations.list_production_orders(status)
 
 
 def main() -> None:
