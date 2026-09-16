@@ -17,6 +17,8 @@ This portfolio project demonstrates how the Model Context Protocol can connect A
 * Isolated temporary databases for automated tests
 * Inventory monitoring with automatic low-stock indicators
 * Production-order tracking and status filtering
+* SQLite FTS5 retrieval over technical maintenance and logistics documents
+* Ranked evidence retrieval with automated top-result evaluation
 
 ## MCP Tools
 
@@ -47,6 +49,17 @@ Returns inventory quantities, reorder levels, storage locations, and low-stock i
 
 Returns production targets, completed quantities, due dates, and order statuses. An optional `status` argument filters the results.
 
+### `search_technical_documents`
+
+Searches the technical knowledge base using SQLite full-text search. It returns ranked maintenance and logistics documents with their identifiers, categories, source content, and relevance scores.
+
+Example query:
+
+```text
+CNC overheating coolant
+
+
+
 ## Project Structure
 
 ```text
@@ -54,16 +67,17 @@ src/manufacturing_mcp_copilot/
 ├── __init__.py
 ├── operations.py
 └── server.py
-
 tests/
-└── test_operations.py
+├── test_operations.py
+└── test_retrieval.py
 ```
-
 src/manufacturing_mcp_copilot/
 ├── __init__.py
 ├── database.py
 ├── operations.py
 └── server.py
+```text
+├── retrieval.py
 
 ## Installation
 
@@ -102,7 +116,7 @@ uv run ruff format .
 * [x] Add automated tests
 * [x] Replace in-memory data with SQLite
 * [x] Add production-order and inventory tools
-* [ ] Add technical-document retrieval
+* [x] Add technical-document retrieval
 * [ ] Add an LLM-powered assistant layer
 * [ ] Evaluate answer quality and hallucinations
 * [ ] Add Docker deployment

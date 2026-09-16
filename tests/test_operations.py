@@ -47,15 +47,12 @@ def test_get_machine_status_rejects_unknown_machine(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="Unknown machine ID"):
         get_machine_status("UNKNOWN-999", db_path=database)
 
+
 def test_get_inventory_status_marks_low_stock(tmp_path: Path) -> None:
     database = tmp_path / "test.db"
 
     inventory = get_inventory_status(db_path=database)
-    low_stock_ids = {
-        item["item_id"]
-        for item in inventory
-        if item["low_stock"]
-    }
+    low_stock_ids = {item["item_id"] for item in inventory if item["low_stock"]}
 
     assert len(inventory) == 4
     assert low_stock_ids == {"MAT-002", "MAT-004"}
