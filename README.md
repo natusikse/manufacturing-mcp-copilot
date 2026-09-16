@@ -2,7 +2,7 @@
 
 An MCP-based integration layer that exposes manufacturing operations data to AI applications through standardized tools.
 
-This portfolio project demonstrates how the Model Context Protocol can connect AI systems with manufacturing and logistics workflows. The current version provides a tested in-memory equipment service; database integration, logistics tools, and a retrieval layer are planned as subsequent milestones.
+This portfolio project demonstrates how the Model Context Protocol can connect AI systems with manufacturing and logistics workflows. The current version provides a tested SQLite-backed equipment service; logistics tools and a retrieval layer are planned as subsequent milestones.
 
 ## Current Features
 
@@ -13,6 +13,8 @@ This portfolio project demonstrates how the Model Context Protocol can connect A
 * Normalization and validation of machine identifiers
 * Automated tests for the operations layer
 * Static analysis and formatting with Ruff
+* SQLite-backed persistence with automatic schema initialization
+* Isolated temporary databases for automated tests
 
 ## MCP Tools
 
@@ -46,6 +48,12 @@ src/manufacturing_mcp_copilot/
 tests/
 └── test_operations.py
 ```
+
+src/manufacturing_mcp_copilot/
+├── __init__.py
+├── database.py
+├── operations.py
+└── server.py
 
 ## Installation
 
@@ -82,7 +90,7 @@ uv run ruff format .
 * [x] Create the initial MCP server
 * [x] Add equipment status tools
 * [x] Add automated tests
-* [ ] Replace in-memory data with SQLite
+* [x] Replace in-memory data with SQLite
 * [ ] Add production-order and inventory tools
 * [ ] Add technical-document retrieval
 * [ ] Add an LLM-powered assistant layer
