@@ -19,6 +19,9 @@ This portfolio project demonstrates how the Model Context Protocol can connect A
 * Production-order tracking and status filtering
 * SQLite FTS5 retrieval over technical maintenance and logistics documents
 * Ranked evidence retrieval with automated top-result evaluation
+* Evidence-grounded LLM answers through the OpenAI Responses API
+* Source citations and safe refusal when retrieval returns no evidence
+* API-free automated testing with a fake Responses client
 
 ## MCP Tools
 
@@ -58,6 +61,12 @@ Example query:
 ```text
 CNC overheating coolant
 
+### `answer_technical_question`
+
+Retrieves relevant technical documents and sends only that evidence to a configurable OpenAI model through the Responses API. The assistant is instructed to cite document identifiers and refuse unsupported answers.
+
+This tool requires `OPENAI_API_KEY` and `OPENAI_MODEL`.
+
 
 
 ## Project Structure
@@ -88,6 +97,22 @@ git clone https://github.com/natusikse/manufacturing-mcp-copilot.git
 cd manufacturing-mcp-copilot
 uv sync
 ```
+## LLM Configuration
+
+Copy the environment template:
+
+```bash
+cp .env.example .env
+```
+
+Add an API key and a model available to your OpenAI API account:
+
+```dotenv
+OPENAI_API_KEY=your-api-key
+OPENAI_MODEL=your-model
+```
+
+The `.env` file is excluded from Git and must never be committed. Automated tests use a fake client and do not make paid API requests.
 
 ## Quality Checks
 
@@ -117,7 +142,7 @@ uv run ruff format .
 * [x] Replace in-memory data with SQLite
 * [x] Add production-order and inventory tools
 * [x] Add technical-document retrieval
-* [ ] Add an LLM-powered assistant layer
+* [x] Add an LLM-powered assistant layer
 * [ ] Evaluate answer quality and hallucinations
 * [ ] Add Docker deployment
 * [ ] Document the complete system architecture
