@@ -1,0 +1,26 @@
+[project]
+name = "manufacturing-mcp-copilot"
+version = "0.1.0"
+description = "MCP-based integration layer for manufacturing and logistics operations"
+readme = "README.md"
+authors = [
+    { name = "Nataliia Evseeva", email = "natasadeputat@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]>=2.2.0",
+]
+
+[project.scripts]
+manufacturing-mcp-copilot = "manufacturing_mcp_copilot:main"
+
+[build-system]
+requires = ["uv_build>=0.12.15,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.16.7",
+]
