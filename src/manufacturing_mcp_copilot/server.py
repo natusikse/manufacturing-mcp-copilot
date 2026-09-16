@@ -53,6 +53,18 @@ def search_technical_documents(
     )
 
 
+@mcp.tool()
+def answer_technical_question(
+    question: str,
+    limit: int = 3,
+) -> dict[str, Any]:
+    """Answer a technical question using retrieved evidence and an LLM."""
+    return operations.answer_technical_question(
+        question=question,
+        limit=limit,
+    )
+
+
 def main() -> None:
     """Run the MCP server using the default stdio transport."""
     mcp.run()

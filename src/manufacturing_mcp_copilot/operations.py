@@ -1,6 +1,9 @@
 from pathlib import Path
 from typing import Any
 
+from manufacturing_mcp_copilot.assistant import (
+    answer_question as generate_grounded_answer,
+)
 from manufacturing_mcp_copilot.database import (
     DEFAULT_DB_PATH,
     get_machine_record,
@@ -58,4 +61,15 @@ def search_technical_documents(
         query=query,
         limit=limit,
         db_path=db_path,
+    )
+
+
+def answer_technical_question(
+    question: str,
+    limit: int = 3,
+) -> dict[str, Any]:
+    """Generate an evidence-grounded answer to a technical question."""
+    return generate_grounded_answer(
+        question=question,
+        limit=limit,
     )

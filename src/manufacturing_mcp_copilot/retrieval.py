@@ -74,6 +74,37 @@ SEED_DOCUMENTS = [
     ),
 ]
 
+STOP_WORDS = {
+    "a",
+    "an",
+    "and",
+    "are",
+    "as",
+    "at",
+    "be",
+    "by",
+    "do",
+    "for",
+    "from",
+    "how",
+    "i",
+    "if",
+    "in",
+    "is",
+    "it",
+    "of",
+    "on",
+    "or",
+    "should",
+    "the",
+    "to",
+    "what",
+    "when",
+    "where",
+    "which",
+    "with",
+}
+
 
 def initialize_retrieval(
     db_path: str | Path = DEFAULT_DB_PATH,
@@ -117,7 +148,11 @@ def search_technical_documents(
     db_path: str | Path = DEFAULT_DB_PATH,
 ) -> list[dict[str, Any]]:
     """Search technical documents using SQLite full-text search."""
-    tokens = re.findall(r"[A-Za-z0-9]+", query.lower())
+    tokens = [
+        token
+        for token in re.findall(r"[A-Za-z0-9]+", query.lower())
+        if token not in STOP_WORDS
+    ]
 
     if not tokens:
         raise ValueError("Search query must contain at least one word")
