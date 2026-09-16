@@ -8,6 +8,9 @@ from manufacturing_mcp_copilot.database import (
     list_machine_records,
     list_production_order_records,
 )
+from manufacturing_mcp_copilot.retrieval import (
+    search_technical_documents as retrieve_documents,
+)
 
 
 def list_machines(
@@ -43,3 +46,16 @@ def list_production_orders(
 ) -> list[dict[str, Any]]:
     """Return production orders, optionally filtered by status."""
     return list_production_order_records(status=status, db_path=db_path)
+
+
+def search_technical_documents(
+    query: str,
+    limit: int = 3,
+    db_path: str | Path = DEFAULT_DB_PATH,
+) -> list[dict[str, Any]]:
+    """Return technical documents relevant to a search query."""
+    return retrieve_documents(
+        query=query,
+        limit=limit,
+        db_path=db_path,
+    )

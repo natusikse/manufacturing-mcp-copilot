@@ -41,6 +41,18 @@ def list_production_orders(
     return operations.list_production_orders(status)
 
 
+@mcp.tool()
+def search_technical_documents(
+    query: str,
+    limit: int = 3,
+) -> list[dict[str, Any]]:
+    """Search maintenance and logistics documents for relevant evidence."""
+    return operations.search_technical_documents(
+        query=query,
+        limit=limit,
+    )
+
+
 def main() -> None:
     """Run the MCP server using the default stdio transport."""
     mcp.run()
